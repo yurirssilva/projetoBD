@@ -1,0 +1,19 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Buscar Produto</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ng-template ngFor let-produto [ngForOf]="produtos">
+        <ion-item (click)="fechar(produto)">
+            <ion-avatar>
+                <img [src]="'assets/pricetag.svg'" />
+            </ion-avatar>
+            <ion-label>
+                <h2>{{produto.nome}}</h2>
+                <h3>Quantidade: {{produto.quantidade}}</h3>
+            </ion-label>
+        </ion-item>
+    </ng-template>
+</ion-content>

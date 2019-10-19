@@ -30,6 +30,11 @@ export class AppComponent {
       title: 'Chamados',
       url: '/chamados',
       icon: 'paper'
+    },
+    {
+      title: 'Relatórios',
+      url: '/relatorios',
+      icon: 'speedometer'
     }
   ];
 

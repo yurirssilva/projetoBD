@@ -5,7 +5,30 @@
 </ion-header>
 
 <ion-content>
-    <ion-button (click)="addProduto()">
-        Cadastrar Produto
-    </ion-button>
+    <ion-grid fixed>
+        <ion-row>
+            <ng-template ngFor let-produto [ngForOf]="produtos">
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-avatar>
+                            <img [src]="'assets/pricetag.svg'" />
+                        </ion-avatar>
+                        <ion-label>
+                            <h2>{{produto.nome}}</h2>
+                            <h3>Quantidade: {{produto.quantidade}}</h3>
+                        </ion-label>
+                    </ion-item>
+                </ion-col>
+            </ng-template>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="addProduto()">
+                Cadastrar Produto
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

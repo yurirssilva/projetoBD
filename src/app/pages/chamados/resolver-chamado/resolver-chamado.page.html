@@ -1,9 +1,113 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>resolverChamado</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <div class="cabecalho">
+            <ion-title>Ficha do Chamado</ion-title>
+            <ion-button (click)="fechar()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </div>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <div class="centralizar">
+        <ion-spinner name="bubbles" *ngIf="!chamado"></ion-spinner>
+    </div>
+    <ion-list *ngIf="chamado">
+        <ion-item-divider>
+            <ion-label>
+                Dados do Chamado
+            </ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-label position="stacked">Descrição</ion-label>
+            <ion-textarea [value]="chamado.descricao" readonly></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Funcionário</ion-label>
+            <ion-input type="text" [value]="chamado.funcionario_id.nome" readonly></ion-input>
+        </ion-item>
+        <ion-row class="ion-no-padding">
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label position="stacked">Tipo de Serviço</ion-label>
+                    <ion-input type="text" [value]="chamado.tipo_servico.nome" readonly></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label position="stacked">Prioridade do Serviço</ion-label>
+                    <ion-input type="text" [value]="chamado.tipo_servico.prioridade" readonly></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-item>
+            <ion-label position="stacked">Data de Abertura</ion-label>
+            <ion-input type="text" [value]="retornarData(chamado.data_hora_abertura)" readonly></ion-input>
+        </ion-item>
+        <ion-item-divider>
+            <ion-label>
+                Resolução do Chamado
+            </ion-label>
+        </ion-item-divider>
+        <ion-item>
+            <ion-label position="stacked">Descrição</ion-label>
+            <ion-textarea [(ngModel)]="finalizar.descricao"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Status</ion-label>
+            <ion-select [(ngModel)]="finalizar.status">
+                <ion-select-option value="Cancelado">Cancelado</ion-select-option>
+                <ion-select-option value="Resolvido">Resolvido</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked">Funcionário</ion-label>
+            <ion-input type="text" [value]="chamado.resolvido && chamado.resolvido.funcionario_id ? chamado.resolvido.funcionario_id.nome : ''" readonly>
+            </ion-input>
+            <ion-icon slot="end" name="search" (click)="atribuirFuncionario()" *ngIf="!chamado.resolvido"></ion-icon>
+        </ion-item>
+        <ion-item-divider>
+            <ion-label>
+                Produtos Utilizados
+            </ion-label>
+        </ion-item-divider>
+        <ng-template ngFor let-produto [ngForOf]="chamado.resolvido.produtosUtilizados">
+            <ion-item>
+                <ion-label>
+                    <h2>{{produto.produto_id.nome}}</h2>
+                    <h3>Quantidade: {{produto.quantidade}}</h3>
+                </ion-label>
+            </ion-item>
+        </ng-template>
+        <ion-row *ngIf="chamado && chamado.status =='Aberto'">
+            <ion-col size="6">
+                <ion-item>
+                    <ion-label position="stacked">Produto</ion-label>
+                    <ion-input type="text" [(ngModel)]="produto.produto_nome">
+                    </ion-input>
+                    <ion-icon slot="end" name="search" (click)="buscarProduto()">
+                    </ion-icon>
+                </ion-item>
+            </ion-col>
+            <ion-col size="4">
+                <ion-label position="stacked">Quantidade</ion-label>
+                <ion-input type="text" [(ngModel)]="produto.quantidade">
+                </ion-input>
+            </ion-col>
+            <ion-col size="2">
+                <ion-button (click)="adicionarProduto()">
+                    <ion-icon name="add"></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-list>
 </ion-content>
+
+<ion-footer *ngIf="chamado && chamado.status =='Aberto'">
+    <ion-toolbar>
+        <ion-button size="full" (click)="finalizarChamado()" [disabled]='!finalizar.descricao || !finalizar.status || (chamado.resolvido && !chamado.resolvido.funcionario_id)'>
+            Finalizar Chamado
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>

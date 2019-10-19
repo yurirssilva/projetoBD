@@ -1,14 +1,44 @@
 <ion-header>
     <ion-toolbar>
         <ion-title>Chamados</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="abrirFiltros($event)">
+                <ion-icon slot="icon-only" name="funnel"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-button (click)="addChamado()">
-        Abrir Chamado
-    </ion-button>
-    <ion-button (click)="resolverChamado()">
-        Resolver Chamado
-    </ion-button>
+
+    <ion-grid fixed>
+        <ion-row>
+            <ng-template ngFor let-chamado [ngForOf]="chamados">
+                <ion-col size="6">
+                    <ion-item (click)="abrirChamado(chamado._id)">
+                        <ion-avatar>
+                            <img [src]="chamado.status == 'Aberto' ? 'assets/mail-open.svg': 'assets/mail.svg'" />
+                        </ion-avatar>
+                        <ion-label>
+                            <h2>{{chamado.descricao}}</h2>
+                            <h3>{{chamado.tipo_servico.nome}}</h3>
+                        </ion-label>
+                        <ion-icon slot="end" name="more" (click)="abrirAction(chamado._id, $event)"></ion-icon>
+                    </ion-item>
+                </ion-col>
+            </ng-template>
+        </ion-row>
+    </ion-grid>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="addChamado()">
+                Abrir Chamado
+            </ion-button>
+            <ion-button (click)="resolverChamado()">
+                Resolver Chamado
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

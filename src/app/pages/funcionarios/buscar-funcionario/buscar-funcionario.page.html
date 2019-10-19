@@ -1,0 +1,24 @@
+<ion-header>
+    <ion-toolbar>
+        <div class="cabecalho">
+            <ion-title>Buscar Funcionário</ion-title>
+            <ion-button (click)="fechar()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ng-template ngFor let-funcionario [ngForOf]="funcionarios">
+        <ion-item (click)="fechar(funcionario)">
+            <ion-avatar>
+                <img [src]="'assets/contact.svg'" />
+            </ion-avatar>
+            <ion-label>
+                <h2>{{funcionario.nome}} - {{funcionario.matricula}}</h2>
+                <h3>{{funcionario.setor}}</h3>
+            </ion-label>
+        </ion-item>
+    </ng-template>
+</ion-content>

@@ -1,0 +1,54 @@
+<ion-content>
+    <ion-list>
+        <ion-item-divider>
+            <ion-label>Filtros</ion-label>
+        </ion-item-divider>
+        <ion-item (click)="filtroStatus()">
+            <ion-label *ngIf="!filtros.status">Status</ion-label>
+            <ion-label *ngIf="filtros.status">
+                <h2>Status</h2>
+                <h3>{{filtros.status}}</h3>
+            </ion-label>
+        </ion-item>
+        <ion-item (click)="filtroInicio()">
+            <ion-label *ngIf="!filtros.data_inicial">Período</ion-label>
+            <ion-label *ngIf="filtros.data_inicial">
+                <h2>Ínicio do Período</h2>
+                <h3>{{retornarData(filtros.data_inicial)}} - {{retornarData(filtros.data_final)}}</h3>
+            </ion-label>
+        </ion-item>
+        <ion-item (click)="filtroProduto()">
+            <ion-label *ngIf="!filtros.utilizouProduto">Utilizou Produtos</ion-label>
+            <ion-label *ngIf="filtros.utilizouProduto">
+                <h2>Utilizou Produtos</h2>
+                <h3>{{filtros.utilizouProduto ? 'Sim' : 'Não'}}</h3>
+            </ion-label>
+        </ion-item>
+        <ion-item (click)="filtroFuncionario('funcionario_criou')">
+            <ion-label *ngIf="!filtros.funcionario_criou">Funcionário Criador</ion-label>
+            <ion-label *ngIf="filtros.funcionario_criou">
+                <h2>Funcionário Criador</h2>
+                <h3>{{funcionario_criou.nome}}</h3>
+            </ion-label>
+        </ion-item>
+        <ion-item (click)="filtroFuncionario('funcionario_atribuido')">
+            <ion-label *ngIf="!filtros.funcionario_atribuido">Funcionário Atribuido</ion-label>
+            <ion-label *ngIf="filtros.funcionario_atribuido">
+                <h2>Funcionário Atribuido</h2>
+                <h3>{{funcionario_atribuido.nome}}</h3>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <div class="botoes-filtro">
+            <ion-button size="full" (click)="retornar()">
+                Filtrar
+            </ion-button>
+            <ion-button size="full" (click)="sair()" color="warning">
+                Limpar
+            </ion-button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

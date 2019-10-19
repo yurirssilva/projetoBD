@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CadastrarSetorPage implements OnInit {
     setor = {
         nome: '',
-        código: null
+        codigo: null
     }
     constructor(
         public modalCtrl: ModalController

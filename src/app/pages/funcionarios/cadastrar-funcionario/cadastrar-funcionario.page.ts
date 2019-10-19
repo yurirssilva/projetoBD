@@ -1,4 +1,5 @@
-import { ModalController } from '@ionic/angular';
+import { ApiService } from './../../../services/api.service';
+import { ModalController, LoadingController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -46,10 +47,15 @@ export class CadastrarFuncionarioPage implements OnInit {
     funcionario = {
         nome: '',
         matricula: null,
-        tipo: null
+        tipo: null,
+        senha: '',
+        setor: ''
     }
     constructor(
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+        public loadingCtrl: LoadingController,
+        public tostCtrl: ToastController,
+        private api: ApiService
     ) { }
 
     ngOnInit() {
@@ -59,8 +65,18 @@ export class CadastrarFuncionarioPage implements OnInit {
         this.modalCtrl.dismiss()
     }
 
-    salvar() {
+    async salvar() {
+        let loading = await this.loadingCtrl.create({ message: 'Cadastrando...' })
+        loading.present()
 
+        let funcionario = await this.api.post(JSON.stringify(this.funcionario), 'funcionarios')
+        loading.dismiss()
+        console.log('funcionario ==> ', funcionario);
+
+        let toast = await this.tostCtrl.create({ message: "Funcionário cadastrado com sucesso!", duration: 3000 })
+        toast.present()
+        
+        this.fechar()
     }
 
 }
