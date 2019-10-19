@@ -19,7 +19,17 @@ export class AppComponent {
     {
       title: 'Funcionários',
       url: '/funcionarios',
-      icon: 'person'
+      icon: 'people'
+    },
+    {
+      title: 'Estoque',
+      url: '/estoque',
+      icon: 'cart'
+    },
+    {
+      title: 'Chamados',
+      url: '/chamados',
+      icon: 'paper'
     }
   ];
 

@@ -11,7 +11,13 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule)
   },
-  { path: 'funcionarios', loadChildren: './pages/funcionarios/funcionarios.module#FuncionariosPageModule' },  { path: 'estoque', loadChildren: './pages/estoque/estoque.module#EstoquePageModule' }
+  { path: 'funcionarios', loadChildren: './pages/funcionarios/funcionarios.module#FuncionariosPageModule' },  { path: 'estoque', loadChildren: './pages/estoque/estoque.module#EstoquePageModule' },
+  { path: 'chamados', loadChildren: './pages/chamados/chamados.module#ChamadosPageModule' },
+  { path: 'cadastrar-funcionario', loadChildren: './pages/funcionarios/cadastrar-funcionario/cadastrar-funcionario.module#CadastrarFuncionarioPageModule' },
+  { path: 'cadastrar-setor', loadChildren: './pages/funcionarios/cadastrar-setor/cadastrar-setor.module#CadastrarSetorPageModule' },
+  { path: 'cadastrar-produto', loadChildren: './pages/estoque/cadastrar-produto/cadastrar-produto.module#CadastrarProdutoPageModule' },
+  { path: 'abrir-chamado', loadChildren: './pages/chamados/abrir-chamado/abrir-chamado.module#AbrirChamadoPageModule' },
+  { path: 'resolver-chamado', loadChildren: './pages/chamados/resolver-chamado/resolver-chamado.module#ResolverChamadoPageModule' }
 
 
 ];
