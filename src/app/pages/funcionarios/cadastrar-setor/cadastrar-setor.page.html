@@ -1,0 +1,28 @@
+<ion-header>
+    <ion-toolbar>
+        <div class="cabecalho">
+            <ion-title>Cadastrar Setor</ion-title>
+            <ion-button (click)="fechar()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label stacked >Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="setor.nome"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label stacked >Código</ion-label>
+        <ion-input type="text" [(ngModel)]="setor.codigo"></ion-input>
+    </ion-item>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-button (click)="salvar()" size="full">
+            Salvar
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>
