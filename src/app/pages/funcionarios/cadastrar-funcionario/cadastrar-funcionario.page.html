@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <div class="cabecalho">
+            <ion-title>Cadastrar Funcionário</ion-title>
+            <ion-button (click)="fechar()">
+                <ion-icon name="close"></ion-icon>
+            </ion-button>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label position="stacked" >Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="funcionario.nome"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked" >Matricula</ion-label>
+        <ion-input type="text" [(ngModel)]="funcionario.matricula"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Tipo</ion-label>
+        <ion-select [(ngModel)]="funcionario.tipo">
+            <ion-select-option value="TI">TI</ion-select-option>
+            <ion-select-option value="Outros">Outros</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked">Setor</ion-label>
+        <ion-select [(ngModel)]="funcionario.setor">
+            <ng-template ngFor let-setor [ngForOf]="setores">
+                <ion-select-option [value]="setor">{{setor}}</ion-select-option>
+            </ng-template>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label position="stacked" >Senha</ion-label>
+        <ion-input type="password" [(ngModel)]="funcionario.senha"></ion-input>
+    </ion-item>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-button (click)="salvar()" size="full">
+            Salvar
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>
